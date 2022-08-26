@@ -1,46 +1,32 @@
-import { Suspense } from "react";
 import {
-    BrowserRouter,
-    Navigate,
-    NavLink,
+    BrowserRouter, NavLink,
     Route,
     Routes
 } from "react-router-dom";
+import { ShoppingPage } from "../component-patterns/pages/ShoppingPage";
 import logo from "../logo.svg";
-import { routes } from "./routes";
 
 export const Navigation = () => {
   return (
-    <Suspense fallback={<span>Loading...</span>}>
-        <BrowserRouter>
-        <div className="main-layout">
-            <nav>
-            <img src={logo} alt="React Logo" />
-            <ul>
-                {routes.map(({ to, name }, index) => (
-                <li key={index}>
-                    <NavLink
-                    to={to}
-                    className={({ isActive }) => (isActive ? "nav-active" : "")}
-                    >
-                    {name}
-                    </NavLink>
-                </li>
-                ))}
-            </ul>
-            </nav>
-            <Routes>
-            {routes.map(({ path, Component }, index) => (
-                <Route key={index} path={path} element={<Component />}></Route>
-            ))}
-            <Route
-                path="/*"
-                element={<Navigate to="/lazy1" replace></Navigate>}
-            ></Route>
-            </Routes>
-        </div>
-        </BrowserRouter>
-
-    </Suspense>
+    <BrowserRouter>
+      <div className="main-layout">
+        <nav>
+          <img src={logo} alt="React Logo" />
+          <ul>
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) => (isActive ? "nav-active" : "")}
+              >
+                Shopping
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+        <Routes>
+          <Route path="/" element={<ShoppingPage />}></Route>
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 };
