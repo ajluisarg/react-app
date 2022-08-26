@@ -1,8 +1,4 @@
-export interface Props {
-    product: Product;
-  }
-  
-export interface Product {
+  export interface Product {
     id: string;
     title: string;
     img?: string;
