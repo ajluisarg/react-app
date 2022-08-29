@@ -1,14 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UseProductHook } from "../interfaces/products.interfaces";
 
-const useProduct = (): UseProductHook => {
+const useProduct = (onChange? : (count: number) => any, count = 0): UseProductHook => {
 
 
     const [counter, setCounter] = useState(0);
 
     const increaseBy = (value: number) => {
-      setCounter((prev) => Math.max(prev + value, 0));
+      const newValue =  Math.max(counter + value, 0);
+      setCounter(newValue);
+      onChange && onChange(newValue);
     };
+
+    useEffect(() => {
+      setCounter(count);
+    }, [count])
+    
 
     return {
         counter,
