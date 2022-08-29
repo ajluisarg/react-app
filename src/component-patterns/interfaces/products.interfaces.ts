@@ -5,8 +5,26 @@
   }
 
 export interface UseProductHook {
-    counter: number, increaseBy: 
-    (value: any) => void
+    counter: number,
+    isMaxCountReached: boolean,
+    reset: () => void;
+    increaseBy: (value: any) => void
 }
   
-export type ProductContextProps = UseProductHook & {product: Product};
+export type ProductContextProps = Pick<UseProductHook, 'counter' | 'increaseBy'> & {product: Product} & {maxCounter?: number};
+
+
+export interface InitialValues {
+  count?: number;
+  maxCounter?: number
+}
+
+export interface ProductCardHandlers {
+  count: number;
+  isMaxCountReached: boolean;
+  maCount?: number;
+  product: Product;
+
+  increaseBy: (value: number) => void;
+  reset: () => void;
+}
